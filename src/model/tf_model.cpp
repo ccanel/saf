@@ -19,6 +19,7 @@
 #include <tensorflow/core/protobuf/meta_graph.pb.h>
 
 #include "common/context.h"
+#include "model/model_manager.h"
 #include "utils/utils.h"
 
 TFModel::TFModel(const ModelDesc& model_desc, Shape input_shape)
