@@ -13,7 +13,7 @@
 # limitations under the License.
 
 macro(add_build_reqs target)
-  target_compile_options(${target} PRIVATE -Wall -Wextra)
+  target_compile_options(${target} PRIVATE -Wall -Wextra -fno-stack-protector)
   set_target_properties(${target} PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
