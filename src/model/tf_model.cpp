@@ -57,6 +57,7 @@ void TFModel::Load() {
   }
 }
 
+#if 0
 cv::Mat TFModel::ConvertAndNormalize(cv::Mat img) {
   cv::Mat converted;
   if (input_shape_.channel == 3) {
@@ -69,6 +70,29 @@ cv::Mat TFModel::ConvertAndNormalize(cv::Mat img) {
   cv::normalize(converted, normalized, -0.5, 0.5, cv::NORM_MINMAX);
   return normalized;
 }
+#endif
+cv::Mat TFModel::ConvertAndNormalize(cv::Mat img) {
+  int format;
+  if (input_shape_.channel == 3) {
+    format = CV_32FC3;
+  } else {
+    format = CV_32FC1;
+  }
+
+  // Convert from CV_8UCX to CV_32FCX
+  cv::Mat input;
+  img.convertTo(input, format);
+  cv::Scalar mean_colors = ModelManager::GetInstance().GetMeanColors();
+  cv::Mat mean_image = cv::Mat(
+      cv::Size(input_shape_.width, input_shape_.height), format, mean_colors);
+  // Subtract the mean image
+  cv::Mat input_normalized(cv::Size(input_shape_.width, input_shape_.height),
+                           format);
+  cv::subtract(input, mean_image, input_normalized);
+  input_normalized *= model_desc_.GetInputScale();
+  return input_normalized;
+}
+
 
 std::unordered_map<std::string, std::vector<cv::Mat>> TFModel::Evaluate(
     const std::unordered_map<std::string, std::vector<cv::Mat>>& input_map,
