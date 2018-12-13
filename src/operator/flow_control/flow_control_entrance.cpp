@@ -69,7 +69,7 @@ void FlowControlEntrance::Process() {
     frame->SetFlowControlEntrance(this);
     PushFrame(SINK_NAME, std::move(frame));
   } else {
-    LOG(WARNING) << "Insufficient flow control tokens. Dropping frame: " << id;
+    //LOG(WARNING) << "Insufficient flow control tokens. Dropping frame: " << id;
   }
 }
 

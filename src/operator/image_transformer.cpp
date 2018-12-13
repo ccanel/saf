@@ -75,6 +75,7 @@ void ImageTransformer::Process() {
     cv::cvtColor(img, sample_image, cv::COLOR_GRAY2BGR);
   else
     sample_image = img;
+  cv::cvtColor(sample_image, sample_image, cv::COLOR_BGR2RGB);
 
   cv::Mat sample_cropped;
   // Crop according to scale

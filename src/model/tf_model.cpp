@@ -89,7 +89,7 @@ cv::Mat TFModel::ConvertAndNormalize(cv::Mat img) {
   cv::Mat input_normalized(cv::Size(input_shape_.width, input_shape_.height),
                            format);
   cv::subtract(input, mean_image, input_normalized);
-  input_normalized *= model_desc_.GetInputScale();
+  input_normalized *= 1.0 / 127.5;
   return input_normalized;
 }
 
