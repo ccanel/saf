@@ -75,7 +75,6 @@ void ImageTransformer::Process() {
     cv::cvtColor(img, sample_image, cv::COLOR_GRAY2BGR);
   else
     sample_image = img;
-  cv::cvtColor(sample_image, sample_image, cv::COLOR_BGR2RGB);
 
   cv::Mat sample_cropped;
   // Crop according to scale
@@ -109,7 +108,11 @@ void ImageTransformer::Process() {
     RotateImage(sample_resized, angle_);
   }
 
+  cv::Mat rgb_image;
+  cv::cvtColor(sample_resized, rgb_image, cv::COLOR_BGR2RGB);
+
   frame->SetValue("image", sample_resized);
+  frame->SetValue("rgb_image", rgb_image);
   PushFrame(SINK_NAME, std::move(frame));
 }
 

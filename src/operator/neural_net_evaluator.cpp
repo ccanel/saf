@@ -125,7 +125,7 @@ void NeuralNetEvaluator::Process() {
   } else {
     // Only need to call "ConvertAndNormalize()" if the input is an image (as
     // opposed to a feature map).
-    input_mat = input_frame->GetValue<cv::Mat>("image");
+    input_mat = input_frame->GetValue<cv::Mat>("rgb_image");
     input_frame->SetValue(GetName() + ".image.normalized",
                           model_->ConvertAndNormalize(input_mat));
   }
