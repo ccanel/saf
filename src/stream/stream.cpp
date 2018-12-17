@@ -148,7 +148,7 @@ void StreamReader::PushFrame(std::unique_ptr<Frame> frame, bool block) {
     // There is not enough space in the queue, and we're not supposed to block,
     // so we have no choice but to drop the frame.
     unsigned long id = frame->GetValue<unsigned long>("frame_id");
-    //LOG(WARNING) << "Stream queue full. Dropping frame: " << id;
+    LOG(WARNING) << "Stream queue full. Dropping frame: " << id;
     if (frame->GetFlowControlEntrance()) {
       // This scenario should not happen. If we're using end-to-end flow
       // control, then we should not be using so many tokens such that we are
