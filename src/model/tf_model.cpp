@@ -93,7 +93,6 @@ cv::Mat TFModel::ConvertAndNormalize(cv::Mat img) {
   return input_normalized;
 }
 
-
 std::unordered_map<std::string, std::vector<cv::Mat>> TFModel::Evaluate(
     const std::unordered_map<std::string, std::vector<cv::Mat>>& input_map,
     const std::vector<std::string>& output_layer_names) {
